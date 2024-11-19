@@ -1,5 +1,14 @@
 <script setup>
-import { RouterView } from "vue-router";
+import { ROUTES_PATH } from "@/constants";
+import { onMounted } from "vue";
+import { RouterView, useRoute, useRouter } from "vue-router";
+
+const router = useRouter();
+const route = useRoute();
+const usePathActive = (path) => {
+  return route.path === path;
+};
+onMounted(usePathActive);
 </script>
 
 <template>
@@ -20,15 +29,18 @@ import { RouterView } from "vue-router";
         />
       </svg>
     </div>
-    <el-menu class="nav">
-      <el-menu-item index="1">
+    <el-menu :router="true" class="nav">
+      <el-menu-item
+        :index="ROUTES_PATH.HOME"
+        :class="['item', usePathActive(ROUTES_PATH.HOME) && 'active']"
+      >
         <el-icon :size="44"><Food /></el-icon>
       </el-menu-item>
-      <el-menu-item index="2">
+      <el-menu-item
+        :index="ROUTES_PATH.CATEGORIES"
+        :class="['item', usePathActive(ROUTES_PATH.CATEGORIES) && 'active']"
+      >
         <el-icon :size="44"><Dish /></el-icon>
-      </el-menu-item>
-      <el-menu-item index="3">
-        <el-icon :size="44"><Bowl /></el-icon>
       </el-menu-item>
     </el-menu>
   </div>
@@ -44,4 +56,9 @@ import { RouterView } from "vue-router";
 .logo
     padding: 0 0 15px
     border-bottom: 1px solid lightgrey
+.item
+    color: pink
+
+    &.active
+        color: violet
 </style>

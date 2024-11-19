@@ -1,9 +1,21 @@
 <script setup>
-import { RouterView } from "vue-router";
+const props = defineProps({
+  text: {
+    type: String,
+    default: "",
+  },
+});
 </script>
 
 <template>
-  <el-button type="primary">Primary</el-button>
+  <el-button class="btn" type="primary">
+    {{ text }}
+  </el-button>
 </template>
 
-<style lang="sass" scoped></style>
+<style lang="sass" scoped>
+.btn
+    background-color: violet
+    border: none
+    padding: 20px 20px
+</style>
